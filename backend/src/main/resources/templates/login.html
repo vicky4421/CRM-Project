@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,8 +13,7 @@
   </head>
   <body>
     <!-- header starts here -->
-    <heder>
-      <!-- Navbar -->
+    <header>
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container">
@@ -40,8 +39,9 @@
                         class="nav-link text-white"
                         aria-current="page"
                         href="/index"
-                >Home</a
                 >
+                  Home
+                </a>
               </li>
               <li class="nav-item dropdown">
                 <a
@@ -70,7 +70,7 @@
           </div>
         </div>
       </nav>
-    </heder>
+    </header>
     <!-- header ends here -->
 
     <!-- main starts here -->
@@ -84,29 +84,30 @@
           <!-- login card starts here  -->
           <div class="col-lg-4 col-md-6">
             <div class="card p-5 shadow">
-              <form>
+              <form action="loginForm" method="post">
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label"
-                    >Email address</label
-                  >
+                  <div th:if="${errorMessage}" class="alert alert-success mb-3" role="alert">
+                    <span th:text="${errorMessage}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  <label for="email" class="form-label">Email address</label>
                   <input
                     type="email"
                     class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
+                    id="email"
+                    name="email"
                   />
                   <div id="emailHelp" class="form-text">
                     We'll never share your email with anyone else.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label"
-                    >Password</label
-                  >
+                  <label for="password" class="form-label">Password</label>
                   <input
                     type="password"
                     class="form-control"
-                    id="exampleInputPassword1"
+                    id="password"
+                    name="password"
                   />
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
