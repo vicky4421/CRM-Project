@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -82,6 +82,10 @@
         <div class="row justify-content-center">
           <!-- registration card starts here  -->
           <div class="col-lg-5 col-md-6">
+            <div th:if="${successMessage}" class="alert alert-success mb-3" role="alert">
+              <span th:text="${successMessage}"></span>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <form action="regForm" method="post">
               <div class="card p-5 shadow">
                 <div class="mb-3">
