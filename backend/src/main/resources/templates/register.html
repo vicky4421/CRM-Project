@@ -86,29 +86,28 @@
               <span th:text="${successMessage}"></span>
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <form action="regForm" method="post">
+<!--            form starts here-->
+            <form action="regForm" method="post" onSubmit="validateForm()">
               <div class="card p-5 shadow">
                 <div class="mb-3">
                   <label for="name" class="form-label">Name</label>
-                  <input type="text" class="form-control" name="name" id="name" />
+                  <input type="text" class="form-control" name="name" id="name" required />
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="email" name="email" />
+                  <input type="email" class="form-control" id="email" name="email" required />
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" name="password" />
+                  <input type="password" class="form-control" id="password" name="password" required />
                 </div>
                 <div class="mb-3">
-                  <label for="phoneNumber" class="form-label"
-                    >Phone Number</label
-                  >
-                  <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" />
+                  <label for="phoneNumber" class="form-label">Phone Number</label>
+                  <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required />
                 </div>
                 <div class="mb-3">
                   <label for="city" class="form-label">City</label>
-                  <input type="text" class="form-control" id="city" name="city" />
+                  <input type="text" class="form-control" id="city" name="city" required />
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
               </div>
@@ -140,6 +139,48 @@
     </footer>
     <!-- footer ends here -->
 
+<!--    form validation-->
+    <script type="text/javascript">
+      function validateForm(){
+        var name = document.forms[0]["name"].value;
+        var namePattern = /^[a-z,A-Z ]{5, 25}$/;
+
+        var email = document.forms[0]["email"].value;
+        var emailPattern = /^[a-zA-Z0-9._%±]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+
+        var password = document.forms[0]["password"].value;
+        var passwordPattern = /^[a-z,A-Z,0-9]{5, 25}$/;
+
+        var phoneNumber = document.forms[0]["phoneNumber"].value;
+        var phonePattern = /^[0-9]{10}$/;
+
+        var city = document.forms[0]["city"].value;
+        var cityPattern = /^[a-z,A-Z]{3, 25}$/;
+
+        if(!namePattern.test(name)){
+          alert("Invalid name pattern!")
+          return false;
+        }
+        else if(!emailPattern.test(email)){
+          alert("Invalid email pattern!")
+          return false;
+        }
+        else if(!passwordPattern.test(password)){
+          alert("Invalid email pattern!")
+          return false;
+        }
+        else if(!phoneNumber.test(phoneNumber)){
+          alert("Invalid phoneNumber pattern!")
+          return false;
+        }
+        else if(!cityPattern.test(city)){
+          alert("Invalid city pattern!")
+          return false;
+        } else {
+          return true;
+        }
+      }
+    </script>
     <!-- bootstrap js -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
