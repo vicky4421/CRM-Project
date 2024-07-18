@@ -12,66 +12,8 @@
     />
   </head>
   <body>
-    <!-- header starts here -->
-    <header>
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container">
-          <a class="navbar-brand" href="/index">
-            <img src="/assets/sample%20logo.jpg" alt="logo" width="60" />
-            <span class="h3 text-white">VismijaTech</span>
-          </a>
-          <button
-                  class="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a
-                        class="nav-link text-white"
-                        aria-current="page"
-                        href="/index"
-                >
-                  Home
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                        class="nav-link dropdown-toggle text-white"
-                        href="#"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                >
-                  More
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="#">Online Batch Details</a>
-                  </li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li><a class="dropdown-item" href="#">About us</a></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Contact Us</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <a href="/login" class="btn btn-info ms-4">Login</a>
-            <a href="/register" class="btn btn-info ms-2">Register</a>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <!-- header ends here -->
+  <!--    header-->
+  <div th:replace="~{fragments/header :: crm-header}"></div>
 
     <!-- main starts here -->
     <main class="container-fluid" style="min-height: 544px">
@@ -121,24 +63,8 @@
     </main>
     <!-- main ends here -->
 
-    <!-- footer starts here -->
-    <footer class="footer bg-dark py-3 text-center">
-      <div class="container">
-        <span class="text-white">@Copyright VismijaTech</span>
-        <div class="py-3">
-          <a href="#" class="ms-3 text-decoration-none text-white"
-            >Privacy Policy</a
-          >
-          <a href="#" class="ms-3 text-decoration-none text-white"
-            >Terms and Conditions</a
-          >
-          <a href="#" class="ms-3 text-decoration-none text-white"
-            >Cancellation / Refund Policy</a
-          >
-        </div>
-      </div>
-    </footer>
-    <!-- footer ends here -->
+  <!-- footer starts here -->
+  <div th:replace="~{fragments/footer :: crm-footer}"></div>
 
     <!-- bootstrap js -->
     <script
