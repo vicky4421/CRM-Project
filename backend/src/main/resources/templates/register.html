@@ -12,66 +12,8 @@
     />
   </head>
   <body>
-    <!-- header starts here -->
-    <heder>
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container">
-          <a class="navbar-brand" href="/index">
-            <img src="/assets/sample%20logo.jpg" alt="logo" width="60" />
-            <span class="h3 text-white">VismijaTech</span>
-          </a>
-          <button
-                  class="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a
-                        class="nav-link text-white"
-                        aria-current="page"
-                        href="/index"
-                >Home</a
-                >
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                        class="nav-link dropdown-toggle text-white"
-                        href="#"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                >
-                  More
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="#">Online Batch Details</a>
-                  </li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li><a class="dropdown-item" href="#">About us</a></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Contact Us</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <a href="/login" class="btn btn-info ms-4">Login</a>
-            <a href="/register" class="btn btn-info ms-2">Register</a>
-          </div>
-        </div>
-      </nav>
-    </heder>
-    <!-- header ends here -->
-
+    <!--    header-->
+    <div th:replace="~{fragments/header :: crm-header}"></div>
     <!-- main starts here -->
     <main class="container-fluid" style="min-height: 544px">
       <!-- registration section starts here -->
@@ -87,31 +29,43 @@
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 <!--            form starts here-->
-            <form action="regForm" method="post" onSubmit="validateForm()">
-              <div class="card p-5 shadow">
-                <div class="mb-3">
-                  <label for="name" class="form-label">Name</label>
-                  <input type="text" class="form-control" name="name" id="name" required />
+            <form action="regForm" method="post" onsubmit="return validateForm()" th:object="${user}">
+              <div class="card shadow p-5">
+                <div th:if="${successMsg}" class="mb-3 alert alert-success" role="alert">
+                  <span th:text="${successMsg}"></span>
                 </div>
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="email" name="email" required />
+                  <label class="form-label">Name : </label>
+                  <input type="text" class="form-control" name="name" th:field="*{name}" required />
+                  <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                 </div>
                 <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" name="password" required />
+                  <label class="form-label">Email Id :</label>
+                  <input type="email" class="form-control" name="email" th:field="*{email}" required />
+                  <div id="emailHelp" class="form-text">
+                    We'll never share your email with anyone else.
+                  </div>
+                  <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
                 <div class="mb-3">
-                  <label for="phoneNumber" class="form-label">Phone Number</label>
-                  <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required />
+                  <label class="form-label">Password : </label>
+                  <input type="password" class="form-control" name="password" th:field="*{password}" required />
+                  <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                 </div>
                 <div class="mb-3">
-                  <label for="city" class="form-label">City</label>
-                  <input type="text" class="form-control" id="city" name="city" required />
+                  <label class="form-label">Phone No. : </label>
+                  <input type="text" class="form-control" name="phoneno" th:field="*{phoneNo}" required />
+                  <div class="text-danger" th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}"></div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">City : </label>
+                  <input type="text" class="form-control" name="city" th:field="*{city}" required />
+                  <div class="text-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
               </div>
             </form>
+
           </div>
           <!-- registration card ends here  -->
         </div>
@@ -121,66 +75,59 @@
     <!-- main ends here -->
 
     <!-- footer starts here -->
-    <footer class="footer bg-dark py-3 text-center">
-      <div class="container">
-        <span class="text-white">@Copyright VismijaTech</span>
-        <div class="py-3">
-          <a href="#" class="ms-3 text-decoration-none text-white"
-            >Privacy Policy</a
-          >
-          <a href="#" class="ms-3 text-decoration-none text-white"
-            >Terms and Conditions</a
-          >
-          <a href="#" class="ms-3 text-decoration-none text-white"
-            >Cancellation / Refund Policy</a
-          >
-        </div>
-      </div>
-    </footer>
-    <!-- footer ends here -->
+    <div th:replace="~{fragments/footer :: crm-footer}"></div>
 
 <!--    form validation-->
     <script type="text/javascript">
-      function validateForm(){
-        var name = document.forms[0]["name"].value;
-        var namePattern = /^[a-z,A-Z ]{5, 25}$/;
+      function validateForm()
+      {
+          var name = document.forms[0]["name"].value;
+          var namePattern = /^[a-z,A-Z ]{5,25}$/;
 
-        var email = document.forms[0]["email"].value;
-        var emailPattern = /^[a-zA-Z0-9._%±]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+          var email = document.forms[0]["email"].value;
+          var emailPattern = /^[a-zA-Z0-9._%±]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
 
-        var password = document.forms[0]["password"].value;
-        var passwordPattern = /^[a-z,A-Z,0-9]{5, 25}$/;
+          var password = document.forms[0]["password"].value;
+          var passwordPattern = /^[a-z,A-Z,0-9]{5,25}$/;
 
-        var phoneNumber = document.forms[0]["phoneNumber"].value;
-        var phonePattern = /^[0-9]{10}$/;
+          var phoneno = document.forms[0]["phoneno"].value;
+          var phonenoPattern = /^[0-9]{10}$/;
 
-        var city = document.forms[0]["city"].value;
-        var cityPattern = /^[a-z,A-Z]{3, 25}$/;
+          var city = document.forms[0]["city"].value;
+          var cityPattern = /^[a-z,A-Z]{3,25}$/;
 
-        if(!namePattern.test(name)){
-          alert("Invalid name pattern!")
-          return false;
-        }
-        else if(!emailPattern.test(email)){
-          alert("Invalid email pattern!")
-          return false;
-        }
-        else if(!passwordPattern.test(password)){
-          alert("Invalid email pattern!")
-          return false;
-        }
-        else if(!phoneNumber.test(phoneNumber)){
-          alert("Invalid phoneNumber pattern!")
-          return false;
-        }
-        else if(!cityPattern.test(city)){
-          alert("Invalid city pattern!")
-          return false;
-        } else {
-          return true;
-        }
+          if(!namePattern.test(name))
+          {
+              alert("Invalid name format");
+              return false;
+          }
+          else if(!emailPattern.test(email))
+          {
+              alert("Invalid email format");
+              return false;
+          }
+          else if(!passwordPattern.test(password))
+          {
+              alert("Invalid password format");
+              return false;
+          }
+          else if(!phonenoPattern.test(phoneno))
+          {
+              alert("Invalid phone number format");
+              return false;
+          }
+          else if(!cityPattern.test(city))
+          {
+              alert("Invalid city format");
+              return false;
+          }
+          else
+          {
+              return true;
+          }
       }
     </script>
+
     <!-- bootstrap js -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
