@@ -66,7 +66,10 @@
                   >
                 </div>
                 <div th:unless="${sessionUser == null OR sessionUser == ''}">
-                  <button class="btn btn-primary" onclick="paymentGateway()" >Buy</button>
+                  <button class="btn btn-primary"
+                          th:data-cname="${course.name}"
+                          th:data-cemail="${sessionUser.email}"
+                          onclick="paymentGateway(this.getAttribute('data-cname'), this.getAttribute('data-cemail'))" >Buy</button>
                 </div>
               </div>
               <div class="card-footer text-body-secondary">
@@ -90,9 +93,30 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-        function paymentGateway(){
+        function paymentGateway(courseName, userEmail){
             alert("payment gateway doesn't implemented due to KYC");
+
+            var requestData = {
+                courseName: courseName,
+                userEmail: userEmail,
+                dateOfPurchase: new Date().toLocaleString(),
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/api/storeOrderDetails",
+                contentType: "application/json",
+                data: JSON.stringify(requestData),
+                success: function(response){
+                    alert(response);
+                    window.location.href="/myCourses";
+                },
+                error: function(error){
+                    alert(error);
+                },
+            });
         }
     </script>
   </body>
