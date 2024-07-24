@@ -46,20 +46,18 @@
         <div class="row g-4">
           <!-- courses starts here  -->
           <div
-            th:each="i: ${#numbers.sequence(1, 6)}"
+            th:each="course : ${courseList}"
             class="col-lg-3 col-md-6"
           >
             <div class="card" style="width: 18rem">
-              <img src="/assets/product.jpg" class="card-img-top" alt="..." />
+<!--              <img th:src="${course.imageUrl}" class="card-img-top" alt="..."  /> this also works   -->
+              <img th:src="@{${course.imageUrl}}" class="card-img-top" alt="..." style="width: 17rem; height: 10rem;"  />
               <div class="card-body">
-                <h5 class="card-title">Core Java</h5>
-                <p class="card-text">
-                  This course contains core java concepts, interview
-                  preparations, case studies & 5 projects.
-                </p>
+                <h5 class="card-title" th:text="${course.name}" ></h5>
+                <p class="card-text" th:text="${course.description}" ></p>
                 <p>
-                  <strong>Price: </strong> <del>Rs.5999</del>
-                  <span class="bg-light p-1">Rs.1999</span>
+                  <strong>Price: </strong> <del>Rs.<span th:text="${course.originalPrice}" ></span></del>
+                  <span class="bg-light p-1">Rs.<span th:text="${course.discountedPrice}" ></span></span>
                 </p>
                 <!--                        bordered button if user not logged in-->
                 <div th:if="${sessionUser == null OR sessionUser == ''}">
@@ -68,11 +66,11 @@
                   >
                 </div>
                 <div th:unless="${sessionUser == null OR sessionUser == ''}">
-                  <button class="btn btn-primary">Buy</button>
+                  <button class="btn btn-primary" onclick="paymentGateway()" >Buy</button>
                 </div>
               </div>
               <div class="card-footer text-body-secondary">
-                Updated 2 days ago
+                <span th:text="${course.updatedOn}"></span>
               </div>
             </div>
           </div>
@@ -92,5 +90,10 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script>
+        function paymentGateway(){
+            alert("payment gateway doesn't implemented due to KYC");
+        }
+    </script>
   </body>
 </html>
