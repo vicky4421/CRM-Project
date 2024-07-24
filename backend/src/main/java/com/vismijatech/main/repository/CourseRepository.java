@@ -1,0 +1,7 @@
+package com.vismijatech.main.repository;
+
+import com.vismijatech.main.entity.Course;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CourseRepository extends JpaRepository<Course, Long> {
+}
