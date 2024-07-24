@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,61 +16,9 @@
     />
 </head>
 <body>
-<!-- header starts here -->
-<heder>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="/index">
-                <img src="/assets/sample logo.jpg" alt="logo" width="60" />
-                <span class="h3 text-white">VismijaTech</span>
-            </a>
-            <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a
-                                class="nav-link text-white"
-                                aria-current="page"
-                                href="/index"
-                        >Home</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a
-                                class="nav-link text-white"
-                                aria-current="page"
-                                href="/my-enrollments"
-                        >My Enrollments</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a
-                                class="nav-link text-white ms-5"
-                                aria-current="page"
-                                href="/user-profile"
-                        >
-                            <i class="bi bi-person"></i>
-                            Hello, Vivek!
-                        </a>
-                    </li>
-                </ul>
-                <a href="/logout" class="btn btn-danger ms-2">Logout</a>
-            </div>
-        </div>
-    </nav>
-</heder>
-<!-- header ends here -->
+
+<!--header-->
+<div th:replace="~{fragments/user-header :: u-header}"></div>
 
 <!-- main starts here -->
 <main class="container-fluid" style="min-height: 73.2vh">
@@ -82,7 +30,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <i class="bi bi-person" style="font-size: 8rem"></i>
-                            <h3>Vivek</h3>
+                            <h3 th:text="${sessionUser.name}"></h3>
                         </div>
                     </div>
                 </div>
@@ -96,19 +44,19 @@
                                 <tbody>
                                 <tr>
                                     <td>Name</td>
-                                    <td>Vivek Sawant</td>
+                                    <td th:text="${sessionUser.name}"></td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
-                                    <td>vicky210490@gmail.com</td>
+                                    <td th:text="${sessionUser.email}"></td>
                                 </tr>
                                 <tr>
                                     <td>Phone</td>
-                                    <td>9503876191</td>
+                                    <td th:text="${sessionUser.phoneNo}"></td>
                                 </tr>
                                 <tr>
                                     <td>City</td>
-                                    <td>Sawantpur</td>
+                                    <td th:text="${sessionUser.city}"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -122,22 +70,7 @@
 <!-- main ends here -->
 
 <!-- footer starts here -->
-<footer class="footer bg-dark py-3 text-center">
-    <div class="container">
-        <span class="text-white">@Copyright VismijaTech</span>
-        <div class="py-3">
-            <a href="#" class="ms-3 text-decoration-none text-white"
-            >Privacy Policy</a
-            >
-            <a href="#" class="ms-3 text-decoration-none text-white"
-            >Terms and Conditions</a
-            >
-            <a href="#" class="ms-3 text-decoration-none text-white"
-            >Cancellation / Refund Policy</a
-            >
-        </div>
-    </div>
-</footer>
+<div th:replace="~{fragments/footer :: crm-footer}"></div>
 <!-- footer ends here -->
 
 <!-- bootstrap js -->
