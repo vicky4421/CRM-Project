@@ -1,6 +1,8 @@
 package com.vismijatech.main.controller;
 
+import com.vismijatech.main.entity.Course;
 import com.vismijatech.main.entity.User;
+import com.vismijatech.main.service.CourseService;
 import com.vismijatech.main.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +15,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import java.util.List;
+
 @Controller
 @SessionAttributes("sessionUser")
 public class UserController {
     // get user service reference
     @Autowired
     private UserService userService;
+    @Autowired
+    private CourseService courseService;
 
     // index page
     @GetMapping({"/", "index"})
-    public String openIndexPage(){
+    public String openIndexPage(Model model){
+        List<Course> courseList = courseService.getAllCourseDetails();
+        model.addAttribute("courseList", courseList);
         return "index";
     }
 
@@ -78,4 +86,17 @@ public class UserController {
         status.setComplete();
         return "login";
     }
+
+    // my courses
+    @GetMapping("/myCourses")
+    public String myCoursesPage(){
+        return "my-courses";
+    }
+
+    // my courses
+    @GetMapping("/userProfile")
+    public String openUserProfile(){
+        return "user-profile";
+    }
+
 }
