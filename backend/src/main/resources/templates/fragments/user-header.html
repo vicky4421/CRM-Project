@@ -1,0 +1,55 @@
+<!-- header starts here -->
+<header th:fragment="u-header">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/index">
+                <img src="/assets/sample logo.jpg" alt="logo" width="60" />
+                <span class="h3 text-white">VismijaTech</span>
+            </a>
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a
+                                class="nav-link text-white"
+                                aria-current="page"
+                                href="/index"
+                        >Home</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a
+                                class="nav-link text-white"
+                                aria-current="page"
+                                href="/my-enrollments"
+                        >My Enrollments</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a
+                                class="nav-link text-white ms-5"
+                                aria-current="page"
+                                href="/user-profile"
+                        >
+                            <i class="bi bi-person"></i>
+                            Hello, <span th:text="${sessionUser.name}"></span>
+                        </a>
+                    </li>
+                </ul>
+                <a href="/logout" class="btn btn-danger ms-2">Logout</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- header ends here -->
