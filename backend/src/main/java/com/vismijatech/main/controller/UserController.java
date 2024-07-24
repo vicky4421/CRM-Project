@@ -10,9 +10,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
+@SessionAttributes("sessionUser")
 public class UserController {
     // get user service reference
     @Autowired
@@ -35,7 +37,11 @@ public class UserController {
     @PostMapping("/loginForm")
     public String handleLogin(@ModelAttribute("user") User user, Model model){
         boolean isAuthenticated = userService.loginUser(user.getEmail(), user.getPassword());
-        if (isAuthenticated) return "user-profile";
+        if (isAuthenticated) {
+            User authenticatedUser = userService.findUserByEmail(user.getEmail());
+            model.addAttribute("sessionUser", authenticatedUser);
+            return "user-profile";
+        }
         else {
             model.addAttribute("errorMessage", "Incorrect Credentials!");
             return "login";
